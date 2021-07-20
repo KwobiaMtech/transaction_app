@@ -37,13 +37,13 @@ services:
       - "54320:5432"
     expose:
       - "54320"
+    volumes:
+      - ./db_data:/var/lib/postgresql/data
     restart: always
     environment:
       - POSTGRES_USER=patrick
       - POSTGRES_PASSWORD=osofo
       - POSTGRES_DB=transaction_db
-    volumes:
-      - ./db_data:/var/lib/postgresql/data
 
 volumes:
   db_data:
