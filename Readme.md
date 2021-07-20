@@ -1,3 +1,5 @@
+This is a simple transaction app that uses NestJs as backend and Angular as front end
+
 # How to Run Project
 ## 1. Add an environment file to api
 Add a .env file in the api folder (at the root of your api folder, so nest can find it)
