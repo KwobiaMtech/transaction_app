@@ -1,0 +1,59 @@
+<div class="table-responsive">
+    <table class="table card-table table-vcenter text-nowrap datatable">
+        <thead>
+        <tr>
+            <th class="w-1">ID.
+            </th>
+            <th>Description </th>
+            <th>Amount Deposited</th>
+            <th>Amount Withdrawn</th>
+            <th>Created</th>
+            <th>Status</th>
+            <th>Balance</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let transaction of transactions?.data">
+            <td><span class="text-muted">{{transaction.id}}</span></td>
+            <td><a href="invoice.html" class="text-reset" tabindex="-1">{{transaction.description}}</a></td>
+            <td>
+                {{transaction.amount_deposited}}
+            </td>
+            <td>
+                {{transaction.amount_withdrawn}}
+            </td>
+            <td>
+                {{transaction.created_at| date : 'medium'}}
+            </td>
+            <td >
+                        <span *ngIf="transaction.amount_deposited !== '0.00'">
+                            <span class="badge bg-success me-1"></span> deposit
+                        </span>
+                <span *ngIf="transaction.amount_withdrawn !== '0.00'">
+                            <span class="badge bg-warning me-1"></span> withdrawal
+                        </span>
+
+            </td>
+            <td>{{transaction.account_balance}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="card-footer d-flex align-items-center">
+    <!--<p class="m-0 text-muted">Showing <span>1</span> to <span>8</span> of <span>16</span> entries</p> -->
+    <ul class="pagination m-0 ms-auto">
+        <li class="page-item">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true" (click)="nextPrevPage(transactions.limit, $event, 'prev')">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="15 6 9 12 15 18" /></svg>
+                prev
+            </a>
+        </li>
+        <li *ngFor="let number of pages" class="page-item" [ngClass]="{'active': number == transactions.page}"><a href="#" class="page-link" (click)="paginate(number,transactions.limit, $event)">{{number}}</a></li>
+        <li class="page-item">
+            <a class="page-link" href="#" (click)="nextPrevPage(transactions.limit, $event, 'next')">
+                next
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="9 6 15 12 9 18" /></svg>
+            </a>
+        </li>
+    </ul>
+</div>

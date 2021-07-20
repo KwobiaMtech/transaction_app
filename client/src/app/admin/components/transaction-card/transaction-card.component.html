@@ -1,0 +1,41 @@
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Transactions</h3>
+        <div class="container-xl">
+            <div class="page-header d-print-none">
+                <div class="row align-items-center">
+                    <div class="col-auto ms-auto d-print-none">
+                        <div class="btn-list">
+                            <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#modal-simple">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>
+                                Add New Transaction
+                            </a>
+                            <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal" data-bs-target="#modal-simple" aria-label="Create new report">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body border-bottom py-3">
+        <div class="d-flex">
+            <div class="text-muted">
+                Show
+                <div class="mx-2 d-inline-block">
+                    <input *ngIf="transactions" disabled type="text" class="form-control form-control-sm" value="{{transactions.data?.length}}" size="3" aria-label="Transaction Counts">
+                </div>
+                entries
+            </div>
+        </div>
+    </div>
+    <!-- paginated table -->
+    <app-paginated-table *ngIf="transactions" [transactions]="transactions"></app-paginated-table>
+    <!-- paginated table --ends -->
+</div>
+
+<div class="modal modal-blur fade" id="modal-simple" tabindex="-1" role="dialog" aria-hidden="true">
+    <app-add-transaction-modal></app-add-transaction-modal>
+</div>

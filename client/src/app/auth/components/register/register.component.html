@@ -1,0 +1,56 @@
+<div class="page page-center">
+  <div class="container-tight py-4">
+
+    <div *ngIf="registered" class="alert alert-success" role="alert">
+      <h4 class="alert-title">Wow! Everything worked!</h4>
+      <div class="text-muted">Your account has been Created! You can Login</div>
+    </div>
+
+    <div class="text-center mb-4">
+      <a href="."><img src="./static/logo.svg" height="36" alt=""></a>
+    </div>
+
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate class="card card-md">
+      <div class="card-body">
+        <h2 class="card-title text-center mb-4">Create new account</h2>
+        <div class="mb-3">
+          <label class="form-label">Full Name</label>
+          <input formControlName="full_name" type="text" class="form-control" placeholder="Enter name">
+          <div class="errors" *ngIf="getControl.full_name?.errors"> Full name is required</div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">User Name</label>
+          <input type="text" class="form-control" formControlName="username" placeholder="Enter username">
+          <div class="errors" *ngIf="getControl.username?.errors"> Username is required</div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Email address</label>
+          <input type="email" class="form-control" formControlName="email" placeholder="Enter email">
+          <div class="errors" *ngIf="getControl.email?.errors"> Email name is required</div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Password</label>
+          <div class="input-group input-group-flat">
+            <input type="password" class="form-control" formControlName="password"  placeholder="Password"  autocomplete="off">
+          </div>
+          <div class="errors" *ngIf="getControl.password?.errors"> Password is Required</div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Confirm Password</label>
+          <div class="input-group input-group-flat">
+            <input type="password" class="form-control" formControlName="confirmPassword"  placeholder="Confirm Password"  autocomplete="off">
+          </div>
+          <div class="errors" *ngIf="registerForm.hasError('passwordNotMatching')"> Password not matching</div>
+        </div>
+        <div class="form-footer">
+          <button  type="submit" [disabled]="!registerForm.valid"  class="btn btn-primary w-100">Create new account</button>
+        </div>
+      </div>
+    </form>
+    <div class="text-center text-muted mt-3">
+      Already have account? <a routerLink="/auth/login" tabindex="-1">Sign in</a>
+    </div>
+  </div>
+</div>
