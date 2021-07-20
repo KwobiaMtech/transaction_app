@@ -12,8 +12,11 @@ services:
     command: npm run start:debug
     depends_on:
       - db
-    env_file:
-      - ./.env.dev
+    environment:
+      DATABASE_URL: postgres://patrick:osofo@db:5432/transaction_db
+      DB_LOG_LEVEL: all
+      JWT_SECRET: PATRICKSECRET
+      NODE_ENV: development
     ports:
       - 3000:3000
 
