@@ -19,6 +19,7 @@ services:
     depends_on:
       - db
     environment:
+      NODE_ENV: development
       DB_USERNAME: patrick
       DB_PASSWORD: osofo
       DB_HOST: db
@@ -56,6 +57,7 @@ services:
       # if user, pass, and db changes, need to remove previous containers # docker-compose rm -vf
       - POSTGRES_USER=patrick
       - POSTGRES_PASSWORD=osofo
+      - POSTGRES_DB=transaction_db
     volumes:
       - ./db_data:/var/lib/postgresql/data
 
