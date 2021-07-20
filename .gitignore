@@ -4,3 +4,4 @@ api/.env
 client/dist
 client/node_modules
 .idea
+db_data
