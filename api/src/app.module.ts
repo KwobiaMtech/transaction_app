@@ -19,7 +19,12 @@ import { join } from 'path';
     UserModule,
     TransactionModule,
     ConfigModule.forRoot({ isGlobal: true }),
-    TypeOrmModule.forRoot(Config.typeOrmConfig),
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      url: process.env.DATABASE_URL,
+      autoLoadEntities: true,
+      synchronize: true
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],
