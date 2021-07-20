@@ -3,8 +3,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TransactionService} from '../../../services/transaction.service';
 import {Store} from '@ngxs/store';
 import {AddTransaction, TransactionStatus} from '../../../store/actions/transaction.actions';
-import {Transaction} from "../../../model/transaction.interface";
-import {catchError, tap} from "rxjs/operators";
+import {Transaction} from '../../../model/transaction.interface';
+import {catchError, tap} from 'rxjs/operators';
 
 
 @Component({
@@ -44,6 +44,9 @@ export class AddTransactionModalComponent implements OnInit {
           }),
           catchError((error) => {
             this.transactionFailed = error.error.message;
+            setTimeout(() => {
+              this.transactionFailed = false;
+            }, 1500);
             return error;
           })
       ).subscribe();
