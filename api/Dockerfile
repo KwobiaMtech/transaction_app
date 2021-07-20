@@ -8,7 +8,7 @@ WORKDIR /transaction/src/api
 # Copy package-lock.json & package.json from host to inside container working directory
 COPY package*.json ./
 
-# Install deps inside container
+# Install dependencies inside container
 RUN npm install
 
 RUN npm run build

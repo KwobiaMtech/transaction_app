@@ -5,29 +5,17 @@ services:
     build:
       dockerfile: Dockerfile
       context: ./api
-      # Only build development stage from Dockerfile
       target: development
     volumes:
       - ./api:/transaction/src/api
       - /transaction/src/api/node_modules/
-    # RUN in debug mode: npm run start:debug --> Also start your vscode debugger
-    # Run in dev mode: npm run start:dev
     command: npm run start:debug
     depends_on:
       - db
-    environment:
-      NODE_ENV: development
-      DB_USERNAME: patrick
-      DB_PASSWORD: osofo
-      DB_HOST: db
-      DB_PORT: 5432
-      DB_NAME: transaction_db
-      DB_LOG_LEVEL: all
-      DB_TYPE: postgres
-      JWT_SECRET: PATRICKSECRET
+    env_file:
+      - ./.env.dev
     ports:
       - 3000:3000
-      - 9229:9229
 
   client:
     build:
@@ -51,7 +39,6 @@ services:
       - "54320"
     restart: always
     environment:
-      # if user, pass, and db changes, need to remove previous containers # docker-compose rm -vf
       - POSTGRES_USER=patrick
       - POSTGRES_PASSWORD=osofo
       - POSTGRES_DB=transaction_db
