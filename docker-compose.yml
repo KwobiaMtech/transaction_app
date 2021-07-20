@@ -1,4 +1,4 @@
-version: "3.8"
+version: "3"
 
 services:
   api:
@@ -11,9 +11,9 @@ services:
       - /transaction/src/api/node_modules/
     command: npm run start:debug
     depends_on:
-      - db
+      - postgres
     environment:
-      DATABASE_URL: postgres://patrick:osofo@db:5432/transaction_db
+      DATABASE_URL: postgres://patrick:osofo@postgres:5432/transactiondb
       DB_LOG_LEVEL: all
       JWT_SECRET: PATRICKSECRET
       NODE_ENV: development
@@ -34,19 +34,19 @@ services:
     links:
       - api
 
-  db:
+  postgres:
     image: postgres:12.4
     ports:
-      - "54320:5432"
+      - "54322:5432"
     expose:
-      - "54320"
+      - "54322"
     volumes:
       - ./db_data:/var/lib/postgresql/data
     restart: always
     environment:
       - POSTGRES_USER=patrick
       - POSTGRES_PASSWORD=osofo
-      - POSTGRES_DB=transaction_db
+      - POSTGRES_DB=transactiondb
 
 volumes:
   db_data:
