@@ -28,7 +28,7 @@ Add a .env file in the api folder (at the root of your api folder, so nest can f
 `cd client`    
 `ng build --prod --aot`  
 `cd api`
-`npm start:dev`
+`npm run start:dev`
 
 
 ## To deploy with DOCKER
