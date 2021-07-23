@@ -15,9 +15,6 @@ export class PaginatedTableComponent implements OnInit {
 
   @Input() transactions: any;
 
- // closed: boolean;
- // transactions: PaginatedTransaction | any;
-  paginatedTransactions$: Observable<PaginatedTransaction> = this.transactionService.getTransactions();
   transactions$: Observable<TransactionModel>;
   currentPage: number;
   totalPageLinks: number;
@@ -35,6 +32,8 @@ export class PaginatedTableComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
+    console.log('get available transactions');
+    console.log(this.transactions);
     this.setPages(this.transactions.totalCount, this.transactions.limit, 'first');
     this.transactions$.pipe(
         map((transactions) => {
@@ -64,13 +63,19 @@ export class PaginatedTableComponent implements OnInit {
     if (tempCount !== 0 && tempCount < count){
       pageCount++;
     }
+    pageCount = (pageCount < 1) ? 1 : pageCount;
+
     if (type === 'first'){
-      this.totalPageLinks = pageCount;
+      this.totalPageLinks =  pageCount;
     }
+    console.log('get total page count');
+    console.log(pageCount);
+
     for (let i = 1; i <= pageCount; i++) {
       pages.push(String(i));
     }
     this.pages = pages;
+
   }
 
   nextPrevPage(limit?: number, event?: any, type = 'next'): void{
@@ -82,9 +87,7 @@ export class PaginatedTableComponent implements OnInit {
     if (sendingPage === 1 || sendingPage > 0){
       this.paginate(sendingPage, limit);
     }
-
   }
-
 
   paginate(page?: string|number, limit?: number, event?: Event): void{
     this.currentPage = Number(page);
