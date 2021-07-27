@@ -1,10 +1,10 @@
-import {State, Action, StateContext, Selector} from '@ngxs/store';
-import {AddTransaction, TransactionStatus} from '../actions/transaction.actions';
+import {State, Action, StateContext } from '@ngxs/store';
+import {AddTransaction } from '../actions/transaction.actions';
 import {Transaction} from '../../model/transaction.interface';
 
 
 export interface TransactionModel {
-    transaction: Transaction;
+    addedTransaction: Transaction;
 }
 
 @State<TransactionModel | object>({
@@ -20,7 +20,7 @@ export class TransactionState{
     addTransaction({getState, patchState}: StateContext<TransactionModel>, {payload}: AddTransaction): any{
         const state = getState();
         patchState({
-            transaction: payload
+            addedTransaction: payload
         });
     }
 }

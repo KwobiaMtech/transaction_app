@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {PaginatedTransaction} from '../../../model/transaction.interface';
-import {map, tap} from 'rxjs/operators';
+import { tap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {TransactionModel} from '../../../store/state/transaction.state';
 import {TransactionService} from '../../../services/transaction.service';
@@ -13,12 +13,13 @@ import {Store} from '@ngxs/store';
 })
 export class PaginatedTableComponent implements OnInit {
 
-  @Input() transactions: any;
+  @Input() transactions: PaginatedTransaction | any;
 
-  transactions$: Observable<TransactionModel>;
+  transactionAdded$: Observable<TransactionModel>;
   currentPage: number;
   totalPageLinks: number;
   pages: Array<string> = [];
+  // pages$: Observable<any>;
 
 
   constructor(
@@ -28,34 +29,33 @@ export class PaginatedTableComponent implements OnInit {
     // this.closed = false;
     this.currentPage = 1;
     this.totalPageLinks = 0;
-    this.transactions$ = this.store.select(state => state.add_transaction.transaction);
+    this.transactionAdded$ = this.store.select(state => state.add_transaction.addedTransaction);
   }
 
   async ngOnInit(): Promise<void> {
-    console.log('get available transactions');
-    console.log(this.transactions);
-    this.setPages(this.transactions.totalCount, this.transactions.limit, 'first');
-    this.transactions$.pipe(
-        map((transactions) => {
+    this.setPages(this.transactions?.totalCount, this.transactions?.limit, 'first');
+    this.transactionAdded$.pipe(
+        tap((transactions) => {
           if (transactions){
             this.getPaginatedTransactions();
           }
         })
     ).subscribe();
 
+
   }
 
 
   getPaginatedTransactions(type?: string): void {
     this.transactionService.getTransactions().pipe(
-        map((response: PaginatedTransaction) => {
+        tap((response: PaginatedTransaction) => {
           this.transactions = response;
           this.setPages(this.transactions.totalCount, this.transactions.limit, type);
         })
     ).subscribe();
   }
 
-  setPages(count: number, limit?: number, type?: string): void {
+  setPages(count?: any, limit?: number, type?: string): void {
     const pages = [];
     const pageLimit: any = limit;
     let pageCount = Number(count / pageLimit);
@@ -68,9 +68,6 @@ export class PaginatedTableComponent implements OnInit {
     if (type === 'first'){
       this.totalPageLinks =  pageCount;
     }
-    console.log('get total page count');
-    console.log(pageCount);
-
     for (let i = 1; i <= pageCount; i++) {
       pages.push(String(i));
     }
@@ -106,13 +103,13 @@ export class PaginatedTableComponent implements OnInit {
 
   }
 
-  getNewPaginatedTransactions(page?: number, limit?: number): void {
+ /* getNewPaginatedTransactions(page?: number, limit?: number): void {
     this.transactionService.getTransactions(page, limit).pipe(
-        map((response: PaginatedTransaction) => {
+        tap((response: PaginatedTransaction) => {
           this.transactions = response;
           this.setPages(this.transactions.totalCount, limit);
         })
     ).subscribe();
-  }
+  }*/
 
 }

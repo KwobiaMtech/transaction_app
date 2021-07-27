@@ -5,9 +5,19 @@ export interface Transaction {
 }
 
 export interface PaginatedTransaction {
-    data: Array<any>[];
+    data: Array<TransactionData>[];
     page: number;
     limit: number;
     totalCount: number;
 
+}
+
+export interface TransactionData {
+    id: number;
+    amount_withdrawn: number;
+    amount_deposited: number;
+    account_balance: number;
+    description?: string;
+    created_at?: Date;
+    updated_at?: Date;
 }

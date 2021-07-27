@@ -1,5 +1,5 @@
 <div class="col-12">
-<app-transaction-card *ngIf="(paginatedTransactions$ | async) as transactions" [transactions]="transactions"></app-transaction-card>
+<app-transaction-card *ngIf="paginatedTransactions$ | async as transactions" [transactions]="transactions"></app-transaction-card>
 </div>
 
 

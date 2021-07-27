@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TransactionService} from '../../../services/transaction.service';
 import {Store} from '@ngxs/store';
-import {AddTransaction, TransactionStatus} from '../../../store/actions/transaction.actions';
+import {AddTransaction } from '../../../store/actions/transaction.actions';
 import {Transaction} from '../../../model/transaction.interface';
 import {catchError, tap} from 'rxjs/operators';
 

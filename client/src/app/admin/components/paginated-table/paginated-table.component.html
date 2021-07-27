@@ -12,8 +12,8 @@
             <th>Balance</th>
         </tr>
         </thead>
-        <tbody>
-        <tr *ngFor="let transaction of transactions?.data">
+        <tbody >
+        <tr *ngFor="let transaction of transactions.data">
             <td><span class="text-muted">{{transaction.id}}</span></td>
             <td><a href="invoice.html" class="text-reset" tabindex="-1">{{transaction.description}}</a></td>
             <td>

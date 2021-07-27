@@ -30,19 +30,17 @@ export class AuthService {
   login(login: LoginForm): any {
 
     return this.http.post<any>(this.apiUrl + '/api/user/login', {emailOrUsername: login.email_username, password: login.password}).pipe(
-        map((jwt) => {
-            console.log('get login data');
+        tap((jwt) => {
             console.log(jwt);
+        }),
+        map((jwt) => {
             localStorage.setItem(JWT_TOKEN, jwt.data.token);
-            return jwt.token;
         }));
 
   }
 
   authenticated(): boolean {
       const token: string | any = localStorage.getItem(JWT_TOKEN);
-      console.log('get token');
-      console.log(token);
       return !this.jwtHelper.isTokenExpired(token);
   }
 
