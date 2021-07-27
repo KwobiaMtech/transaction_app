@@ -103,13 +103,4 @@ export class PaginatedTableComponent implements OnInit {
 
   }
 
- /* getNewPaginatedTransactions(page?: number, limit?: number): void {
-    this.transactionService.getTransactions(page, limit).pipe(
-        tap((response: PaginatedTransaction) => {
-          this.transactions = response;
-          this.setPages(this.transactions.totalCount, limit);
-        })
-    ).subscribe();
-  }*/
-
 }
