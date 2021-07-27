@@ -112,12 +112,6 @@ export class TransactionService {
     throw new HttpException(message, status);
   }
 
-  checkTransactionType(type): void {
-    if (!Object.values(TransactionType).includes(type)) {
-      this.raiseException('Transaction Type Not Found', HttpStatus.NOT_FOUND);
-    }
-  }
-
   async usersPaginatedTransactions(
       user: User,
       paginationDto: { limit: number; page: number },
