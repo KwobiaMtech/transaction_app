@@ -14,35 +14,22 @@ import {Store} from '@ngxs/store';
 export class PaginatedTableComponent implements OnInit {
 
   @Input() transactions: PaginatedTransaction | any;
-
-  transactionAdded$: Observable<TransactionModel>;
   currentPage: number;
   totalPageLinks: number;
   pages: Array<string> = [];
-  // pages$: Observable<any>;
+
 
 
   constructor(
       public transactionService: TransactionService,
       private store: Store
   ) {
-    // this.closed = false;
     this.currentPage = 1;
     this.totalPageLinks = 0;
-    this.transactionAdded$ = this.store.select(state => state.add_transaction.addedTransaction);
   }
 
   async ngOnInit(): Promise<void> {
     this.setPages(this.transactions?.totalCount, this.transactions?.limit, 'first');
-    this.transactionAdded$.pipe(
-        tap((transactions) => {
-          if (transactions){
-            this.getPaginatedTransactions();
-          }
-        })
-    ).subscribe();
-
-
   }
 
 

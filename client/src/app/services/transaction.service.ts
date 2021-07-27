@@ -9,15 +9,14 @@ import {environment} from '../../environments/environment';
   providedIn: 'root'
 })
 export class TransactionService {
+  transactions$: Observable<PaginatedTransaction> = this.getTransactions();
+  constructor(private http: HttpClient) {}
 
-  public apiUrl: string;
-  constructor(private http: HttpClient) {
-    this.apiUrl = environment.api_url;
-  }
+
 
 
   addTransaction(transaction: Transaction): Observable<Transaction> {
-   return this.http.post<Transaction>(this.apiUrl + '/api/transactions/add', transaction);
+   return this.http.post<Transaction>(environment.api_url + '/api/transactions/add', transaction);
    // return this.addedTransaction$ = this.http.post<Transaction>(this.apiUrl + '/api/transactions/add', transaction);
   }
 
@@ -25,7 +24,7 @@ export class TransactionService {
     let params = new HttpParams();
     params = params.append('page', String(page));
     params = params.append('limit', String(limit));
-    return this.http.get<PaginatedTransaction>(this.apiUrl + '/api/transactions', {params});
+    return this.http.get<PaginatedTransaction>(environment.api_url + '/api/transactions', {params});
 
   }
 
