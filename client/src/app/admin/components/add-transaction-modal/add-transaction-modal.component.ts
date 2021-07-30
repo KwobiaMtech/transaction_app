@@ -21,7 +21,7 @@ export class AddTransactionModalComponent implements OnInit {
   constructor(public formBuilder: FormBuilder, public transactionService: TransactionService, private store: Store) {
     this.closed = false;
     this.transactionForm = this.formBuilder.group({
-      amount: [null, [Validators.required, Validators.pattern('^[0-9]*$')]],
+      amount: [null, [Validators.required, Validators.pattern('^[0-9\.]*$')]],
       transaction_type: ['deposit', [Validators.required]],
       description: [null, [Validators.required]],
     });

@@ -1,8 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {PaginatedTransaction} from '../../../model/transaction.interface';
 import { tap} from 'rxjs/operators';
-import {Observable} from 'rxjs';
-import {TransactionModel} from '../../../store/state/transaction.state';
 import {TransactionService} from '../../../services/transaction.service';
 import {Store} from '@ngxs/store';
 
@@ -29,18 +27,20 @@ export class PaginatedTableComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
+    console.log('get init transactions');
+    console.log(this.transactions);
     this.setPages(this.transactions?.totalCount, this.transactions?.limit, 'first');
   }
 
 
-  getPaginatedTransactions(type?: string): void {
+ /* getPaginatedTransactions(type?: string): void {
     this.transactionService.getTransactions().pipe(
         tap((response: PaginatedTransaction) => {
           this.transactions = response;
           this.setPages(this.transactions.totalCount, this.transactions.limit, type);
         })
     ).subscribe();
-  }
+  }*/
 
   setPages(count?: any, limit?: number, type?: string): void {
     const pages = [];

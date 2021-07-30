@@ -12,6 +12,7 @@ import {NgxsModule} from '@ngxs/store';
 import {TransactionState} from './store/state/transaction.state';
 import {NgxsReduxDevtoolsPluginModule} from '@ngxs/devtools-plugin';
 import {NgxsLoggerPluginModule} from '@ngxs/logger-plugin';
+import {SetToken} from './store/state/auth.state';
 
 
 
@@ -27,6 +28,7 @@ import {NgxsLoggerPluginModule} from '@ngxs/logger-plugin';
     BrowserModule,
       NgxsModule.forRoot([
           TransactionState,
+          SetToken,
       ]),
       NgxsReduxDevtoolsPluginModule.forRoot(),
       NgxsLoggerPluginModule.forRoot(),

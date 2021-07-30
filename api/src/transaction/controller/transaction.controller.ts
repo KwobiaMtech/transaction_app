@@ -28,7 +28,7 @@ export class TransactionController {
     const user = req.user;
     return this.transactionService.usersPaginatedTransactions(user, {
       ...paginationDto,
-      limit: paginationDto.limit > 4 ? 4 : paginationDto.limit,
+      limit: paginationDto.limit > 10 ? 10 : paginationDto.limit,
     });
   }
   @UseGuards(JwtAuthGuard)
@@ -41,10 +41,4 @@ export class TransactionController {
     return this.transactionService.create(owner, transaction);
   }
 
-  @UseGuards(JwtAuthGuard)
-  @Get('test')
-  test(@Request() req): Observable<Transaction> {
-    const user = req.user;
-    return this.transactionService.getUserInitialTransaction(user);
-  }
 }

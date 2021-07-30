@@ -5,6 +5,8 @@ import { User } from '../model/user.interface';
 import { map, tap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import {JwtHelperService} from '@auth0/angular-jwt';
+import {Store} from "@ngxs/store";
+import {LoginToken} from "../store/actions/auth.action";
 
 
 export const JWT_TOKEN = 'token';
@@ -14,7 +16,7 @@ export const JWT_TOKEN = 'token';
 })
 export class AuthService {
   public apiUrl: string;
-  constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {
+  constructor(private http: HttpClient, private jwtHelper: JwtHelperService, private store: Store) {
     this.apiUrl = environment.api_url;
   }
 
@@ -35,6 +37,7 @@ export class AuthService {
         }),
         map((jwt) => {
             localStorage.setItem(JWT_TOKEN, jwt.data.token);
+            this.store.dispatch(new LoginToken(jwt.data.token));
         }));
 
   }

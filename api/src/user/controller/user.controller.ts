@@ -1,9 +1,9 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { UserService } from '../service/user.service';
 import { User } from '../model/user.inteface';
-import { catchError, map, Observable, of } from 'rxjs';
+import {catchError, map,Observable, of} from 'rxjs';
 import { LoginUserDto, UserDto } from '../model/user.dto';
-import Any = jasmine.Any;
+
 
 @Controller('user')
 export class UserController {
